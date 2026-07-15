@@ -140,6 +140,23 @@ const WorkflowSection = () => {
   )
 }
 
+const getActiveTransformClass = (idx: number) => {
+  switch (idx) {
+    case 0: // Phase 1 (left: 10%)
+      return '-translate-x-[15%] -translate-y-1/2 md:-translate-x-1/2';
+    case 1: // Phase 2 (left: 25%)
+    case 6: // Phase 7 (left: 25%)
+      return '-translate-x-[30%] -translate-y-1/2 md:-translate-x-1/2';
+    case 3: // Phase 4 (left: 75%)
+    case 5: // Phase 6 (left: 75%)
+      return '-translate-x-[70%] -translate-y-1/2 md:-translate-x-1/2';
+    case 4: // Phase 5 (left: 90%)
+      return '-translate-x-[85%] -translate-y-1/2 md:-translate-x-1/2';
+    default:
+      return '-translate-x-1/2 -translate-y-1/2';
+  }
+};
+
 // ==========================================
 // ♾️ FAST INTERACTIVE INFINITY LOOP
 // ==========================================
@@ -181,8 +198,10 @@ const InteractiveInfinity = () => {
         return (
           <div
             key={phase.id}
-            className="absolute z-20 flex items-center justify-center"
-            style={{ top: nodePositions[idx].top, left: nodePositions[idx].left, transform: 'translate(-50%, -50%)' }}
+            className={`absolute z-20 flex items-center justify-center transition-all duration-300 ease-out ${
+              isActive ? getActiveTransformClass(idx) : '-translate-x-1/2 -translate-y-1/2'
+            }`}
+            style={{ top: nodePositions[idx].top, left: nodePositions[idx].left }}
           >
             {/* Switched to a standard div with CSS transition-all to prevent text clipping */}
             <div
