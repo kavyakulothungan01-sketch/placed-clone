@@ -688,10 +688,10 @@ export default function Home() {
         <AlumniSection alumniData={alumniData} alumniIndex={alumniIndex} displayedAlumni={displayedAlumni} />
 
         {/* FOOTER */}
-        <footer className="py-16 md:py-24 px-4 md:px-8 relative overflow-hidden text-slate-400 border-t border-white/5" style={{ background: 'linear-gradient(to right, #11112c, #062641)' }}>
+        <footer className="py-16 md:py-24 px-3.5 md:px-8 relative overflow-hidden text-slate-400 border-t border-white/5" style={{ background: 'linear-gradient(to right, #11112c, #062641)' }}>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0"></div>
           
-          <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-8 relative z-10">
+          <div className="max-w-7xl mx-auto grid grid-cols-[1fr_auto] md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 md:gap-8 relative z-10">
             <div className="flex flex-col md:items-start md:text-left">
               <div className="relative w-40 md:w-56 h-12 md:h-16 mb-6 md:mb-8 overflow-visible flex items-center justify-start">
                  <Image src="/placeddownlogo.png" alt="Placed Logo" fill sizes="(max-width: 768px) 160px, 224px" className="object-contain object-left scale-125 md:scale-150 origin-left" />
@@ -702,7 +702,7 @@ export default function Home() {
               <span className="text-[#0DABAE] font-bold block text-[10px] md:text-xs uppercase tracking-widest">Infinite Possibilities.<br/>Definite Outcome.</span>
             </div>
             
-            <div className="flex flex-col md:items-start md:text-left pl-4 md:pl-0">
+            <div className="flex flex-col md:items-start md:text-left pl-0 md:pl-4 lg:pl-0">
               <h4 className="font-black mb-4 uppercase text-[10px] md:text-xs tracking-widest text-white">Explore</h4>
               <ul className="space-y-2 md:space-y-3 text-[10px] md:text-sm font-medium">
                 <li><Link href="/" className="hover:text-[#0DABAE] transition-colors">Home</Link></li>
@@ -725,20 +725,20 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="flex flex-col md:items-start md:text-left w-full pl-4 md:pl-0">
+            <div className="flex flex-col md:items-start md:text-left w-full pl-0 md:pl-4 lg:pl-0">
               <h4 className="font-black mb-6 uppercase text-[10px] md:text-xs tracking-widest text-white">Connect With Us</h4>
               
-              <div className="flex gap-3 md:gap-4 items-center">
-                <a href="https://www.linkedin.com/company/placedtech/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="LinkedIn Profile">
+              <div className="flex gap-2 md:gap-4 items-center">
+                <a href="https://www.linkedin.com/company/placedtech/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="LinkedIn Profile">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/placed.official?igsh=MTU5ZzBiOGtyYzRneQ==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Instagram Profile">
+                <a href="https://www.instagram.com/placed.official?igsh=MTU5ZzBiOGtyYzRneQ==" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Instagram Profile">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98-.059-1.28.073-1.689-.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
-                <a href="https://www.youtube.com/@placed.official" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Visit our YouTube Channel">
+                <a href="https://www.youtube.com/@placed.official" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Visit our YouTube Channel">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
-                <a href="https://t.me/placed_community" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Join our Telegram Community">
+                <a href="https://t.me/placed_community" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0DABAE] hover:text-[#02111E] border border-white/10 transition-all shrink-0 shadow-sm" aria-label="Join our Telegram Community">
                   <svg className="w-4 h-4 fill-currentColor pl-[1px]" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.87 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.536-.204.1.13.136.708z"/></svg>
                 </a>
               </div>
