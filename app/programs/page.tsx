@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Inter } from 'next/font/google'
-import { supabase } from '@/utils/supabase'
 
 // IMPORT YOUR NEW CHATBOT COMPONENT HERE:
 import Chatbot from '@/components/Chatbot'
@@ -17,7 +16,6 @@ const inter = Inter({ subsets: ['latin'] })
 // ==========================================
 const WHATSAPP_NUMBER = "917907597197" 
 const WHATSAPP_MESSAGE = "Hi PLACED team! I would like to know more about the institutional programs."
-const PLAYSTORE_LINK = "https://lynde.page.link/ofUJ"
 
 const ECOSYSTEM_PILLARS = [
   { 

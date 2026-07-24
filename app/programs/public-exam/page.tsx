@@ -1,19 +1,30 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate, Variants } from 'framer-motion'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const fadeUp: any = {
+interface Category {
+  name: string;
+  items: string[];
+}
+
+interface Module {
+  title: string;
+  desc: string;
+  categories: Category[];
+}
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 }
 
-const staggerContainer: any = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
 }
@@ -119,15 +130,17 @@ const MODULES = [
 // ----------------------------------------------------
 // CUSTOM COMPONENT: NESTED ACCORDION CARD
 // ----------------------------------------------------
-const ModuleCard = ({ mod, isOpen, onToggle }: { mod: any, isOpen: boolean, onToggle: () => void }) => {
+const ModuleCard = ({ mod, isOpen, onToggle }: { mod: Module, isOpen: boolean, onToggle: () => void }) => {
   const [openCategoryIndex, setOpenCategoryIndex] = useState<number | null>(null);
 
-  // Close inner accordions if the outer card is closed
-  useEffect(() => {
+  // Track prevIsOpen to reset openCategoryIndex when transition happens
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
     if (!isOpen) {
       setOpenCategoryIndex(null);
     }
-  }, [isOpen]);
+  }
 
   const toggleCategory = (idx: number, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent clicking a sub-header from closing the main card
@@ -183,7 +196,7 @@ const ModuleCard = ({ mod, isOpen, onToggle }: { mod: any, isOpen: boolean, onTo
             className="flex-1 px-8 pb-8"
           >
             <div className="border-t border-white/10 pt-2 flex flex-col">
-              {mod.categories.map((cat: any, cIdx: number) => {
+              {mod.categories.map((cat: Category, cIdx: number) => {
                 const isCatOpen = openCategoryIndex === cIdx;
                 
                 return (
@@ -281,7 +294,7 @@ export default function PublicExamPage() {
             Public Exam <span className="text-[#0DABAE]">Foundation</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="text-slate-400 max-w-3xl text-base md:text-lg leading-relaxed font-medium">
-            A significant number of students aim for secure careers through competitive government examinations like <span className="text-[#0DABAE] font-bold">SSC, RRB, and central banking tracks (IBPS/SBI), UPSC(CSAT), PSC and many more</span>. PLACED's Public Exam Foundation Program addresses preparation gaps early by combining tech-enabled timed drills, data-oriented concept evaluation, and robust simulated baseline test frameworks.
+            A significant number of students aim for secure careers through competitive government examinations like <span className="text-[#0DABAE] font-bold">SSC, RRB, and central banking tracks (IBPS/SBI), UPSC(CSAT), PSC and many more</span>. PLACED{"'"}s Public Exam Foundation Program addresses preparation gaps early by combining tech-enabled timed drills, data-oriented concept evaluation, and robust simulated baseline test frameworks.
           </motion.p>
         </div>
 

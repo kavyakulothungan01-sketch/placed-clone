@@ -18,8 +18,17 @@ const inter = Inter({ subsets: ['latin'] })
 const WHATSAPP_NUMBER = "917907597197" 
 const WHATSAPP_MESSAGE = "Hi PLACED team! I would like to know more about the institutional programs."
 
+interface Alumni {
+  id: string | number;
+  image_path: string;
+  name: string;
+  company: string;
+  testimony?: string;
+  short_quote?: string;
+}
+
 export default function AlumniPage() {
-  const [alumniData, setAlumniData] = useState<any[]>([])
+  const [alumniData, setAlumniData] = useState<Alumni[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -173,7 +182,7 @@ export default function AlumniPage() {
 
                   {/* BOTTOM TESTIMONY SECTION - Block Justified Text */}
                   <div className="flex-1 relative mt-2">
-                    <div className="absolute -top-6 -left-2 text-6xl text-[#0DABAE]/20 font-black leading-none pointer-events-none select-none">"</div>
+                    <div className="absolute -top-6 -left-2 text-6xl text-[#0DABAE]/20 font-black leading-none pointer-events-none select-none">{"\""}</div>
                     <p className="text-[13px] md:text-sm leading-relaxed text-slate-300 relative z-10 text-justify hyphens-auto mt-2">
                       {alumni.testimony || alumni.short_quote}
                     </p>

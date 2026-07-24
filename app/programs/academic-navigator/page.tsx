@@ -1,17 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { motion, useMotionValue, useMotionTemplate } from 'framer-motion'
+import { motion, useMotionValue, useMotionTemplate, Variants } from 'framer-motion'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 }
 
-const staggerContainer: any = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
 }
@@ -62,7 +62,7 @@ export default function AcademicNavigatorPage() {
             variants={fadeUp}
             className="text-slate-300 text-base md:text-lg leading-relaxed font-medium text-justify"
           >
-            Many graduating students face intense confusion when navigating the transition between entering the workforce, preparing for competitive exams, or pursuing higher studies. To resolve this, PLACED provides clear guidance through a structured framework that aligns postgraduate selections, professional pathways, and learning tracks directly with each student's personal interests and long-term career goals. This initiative is heavily supported by a strategic collaboration with Indian Edu Hub, which grants students structured administrative support and open access to diverse higher education opportunities. Crucially, the system integrates these pathways, allowing students to concurrently pursue postgraduate studies while actively preparing for placements or government exams, offering continuous skill development as a value-added ecosystem support with absolutely no hidden costs.
+            Many graduating students face intense confusion when navigating the transition between entering the workforce, preparing for competitive exams, or pursuing higher studies. To resolve this, PLACED provides clear guidance through a structured framework that aligns postgraduate selections, professional pathways, and learning tracks directly with each student{"'"}s personal interests and long-term career goals. This initiative is heavily supported by a strategic collaboration with Indian Edu Hub, which grants students structured administrative support and open access to diverse higher education opportunities. Crucially, the system integrates these pathways, allowing students to concurrently pursue postgraduate studies while actively preparing for placements or government exams, offering continuous skill development as a value-added ecosystem support with absolutely no hidden costs.
           </motion.p>
         </motion.div>
 

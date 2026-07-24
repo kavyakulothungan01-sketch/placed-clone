@@ -34,7 +34,7 @@ export default function SignupPage() {
     setIsSubmitting(true)
 
     // Using Supabase Auth signUp to handle user generation and trigger Resend
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: crypto.randomUUID(), // Generates a secure random password on the fly
       options: {
@@ -64,7 +64,7 @@ export default function SignupPage() {
     setIsVerifying(true)
 
     // Verify token against Supabase auth instance
-    const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
+    const { error: verifyError } = await supabase.auth.verifyOtp({
       email: formData.email,
       token: otpToken,
       type: 'signup'
@@ -236,7 +236,7 @@ export default function SignupPage() {
                   <div className="mt-5 xl:mt-6 pt-4 xl:pt-5 border-t border-slate-200 text-center lg:text-left">
                     <p className="text-[9px] xl:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 xl:mb-3">Or download the app to know more</p>
                     <a href={PLAYSTORE_LINK} target="_blank" rel="noopener noreferrer" className="inline-block hover:scale-105 transition-transform">
-                      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-8 md:h-10 w-auto object-contain" />
+                      <Image src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width={135} height={40} className="h-8 md:h-10 w-auto object-contain" />
                     </a>
                   </div>
                 </motion.div>

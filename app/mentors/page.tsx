@@ -18,12 +18,23 @@ const inter = Inter({ subsets: ['latin'] })
 const WHATSAPP_NUMBER = "917907597197" 
 const WHATSAPP_MESSAGE = "Hi PLACED team! I would like to know more about the institutional programs."
 
+interface Mentor {
+  id: string | number;
+  name: string;
+  role?: string;
+  company?: string;
+  image_url?: string;
+  initials?: string;
+  description?: string;
+  biography?: string;
+}
+
 export default function MentorsPage() {
-  const [mentorsData, setMentorsData] = useState<any[]>([])
+  const [mentorsData, setMentorsData] = useState<Mentor[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isChatOpen, setIsChatOpen] = useState(false)
-  const [selectedMentor, setSelectedMentor] = useState<any>(null)
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null)
   const [dbError, setDbError] = useState<string | null>(null)
 
   // Pure hardware-accelerated global coordinates tracking
@@ -60,8 +71,9 @@ export default function MentorsPage() {
         } else {
           setDbError("Connection successful, but the 'mentors' table is currently empty (0 rows found).")
         }
-      } catch (err: any) {
-        setDbError(`System Exception: ${err.message}`)
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : String(err)
+        setDbError(`System Exception: ${errorMessage}`)
       } finally {
         setIsLoading(false)
       }
@@ -70,7 +82,7 @@ export default function MentorsPage() {
   }, [])
 
   // Sanitize the role/company string to safely remove any trailing "@" symbol
-  const getCleanRole = (mentor: any) => {
+  const getCleanRole = (mentor: Mentor) => {
     const rawRole = mentor.company || mentor.role || ""
     return rawRole.replace(/@\s*$/, '').trim()
   }
@@ -163,7 +175,7 @@ export default function MentorsPage() {
       <div className="min-h-screen bg-[#052742] text-white pt-10 pb-20 px-4 md:px-8 mt-[72px] md:mt-[80px] relative overflow-hidden z-20">
         
         {/* Soft Skills & Aptitude Floating Ambient Symbols */}
-        <motion.div animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 text-[#0DABAE]/10 text-9xl font-serif font-black pointer-events-none z-0">"</motion.div>
+        <motion.div animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 text-[#0DABAE]/10 text-9xl font-serif font-black pointer-events-none z-0">{"\""}</motion.div>
         <motion.div animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-40 right-20 text-[#0DABAE]/10 text-9xl font-black pointer-events-none z-0">?</motion.div>
         <motion.div animate={{ y: [0, -15, 0], scale: [1, 1.05, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/2 left-1/4 text-[#0DABAE]/10 text-8xl font-black pointer-events-none z-0">!</motion.div>
         
@@ -202,7 +214,7 @@ export default function MentorsPage() {
                   <div className="flex flex-col items-center justify-center w-full my-auto text-center">
                     <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4 border border-white/5 bg-slate-900 shrink-0 shadow-md">
                       {mentor.image_url ? (
-                         <img src={mentor.image_url} alt={mentor.name} className="w-full h-full object-cover object-top pointer-events-none" />
+                         <Image src={mentor.image_url} alt={mentor.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top pointer-events-none" />
                       ) : (
                          <div className="w-full h-full bg-[#0DABAE]/10 text-[#0DABAE] flex items-center justify-center text-3xl font-black">
                            {mentor.initials}
@@ -258,7 +270,7 @@ export default function MentorsPage() {
               <div className="text-center pt-2">
                 <div className="w-24 h-24 md:w-28 md:h-28 mx-auto rounded-xl flex items-center justify-center mb-6 relative overflow-hidden border-2 border-[#0DABAE] aspect-square shadow-md bg-[#052742]">
                   {selectedMentor.image_url ? (
-                     <img src={selectedMentor.image_url} alt={selectedMentor.name} className="w-full h-full object-cover object-top pointer-events-none" />
+                     <Image src={selectedMentor.image_url} alt={selectedMentor.name} fill sizes="(max-width: 768px) 112px, 112px" className="object-cover object-top pointer-events-none" />
                   ) : (
                      <div className="w-full h-full bg-[#0DABAE]/10 text-[#0DABAE] flex items-center justify-center text-4xl font-black">
                        {selectedMentor.initials}

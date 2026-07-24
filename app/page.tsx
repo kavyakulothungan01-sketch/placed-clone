@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence, useMotionValue, useTransform, useMotionTemplate } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform, useMotionTemplate, Variants } from 'framer-motion'
 import { Inter } from 'next/font/google'
 import { supabase } from '@/utils/supabase'
 
@@ -11,6 +11,35 @@ import { supabase } from '@/utils/supabase'
 import Chatbot from '@/components/Chatbot'
 
 const inter = Inter({ subsets: ['latin'] })
+
+interface Alumni {
+  id: string | number;
+  image_path: string;
+  name: string;
+  company: string;
+  testimony?: string;
+  short_quote?: string;
+}
+
+interface Mentor {
+  id: string | number;
+  name: string;
+  role?: string;
+  company?: string;
+  image_url?: string;
+  initials?: string;
+  description?: string;
+  biography?: string;
+}
+
+interface Founder {
+  id: string;
+  name: string;
+  role: string;
+  imagePath: string;
+  bio: string;
+  linkedin: string;
+}
 
 // ==========================================
 // 🛠️ EMBEDDED SETTINGS & GLOBAL HELPERS
@@ -20,7 +49,7 @@ const WHATSAPP_MESSAGE = "Hi PLACED team! I would like to know more about the in
 const PLAYSTORE_LINK = "https://lynde.page.link/ofUJ"
 
 // Global helper to safely clean roles/companies of trailing '@' symbols
-const getCleanRole = (mentor: any) => {
+const getCleanRole = (mentor: Mentor) => {
   const rawRole = mentor?.company || mentor?.role || ""
   return rawRole.replace(/@\s*$/, '').trim()
 }
@@ -44,18 +73,18 @@ const ECOSYSTEM_PILLARS = [
 ]
 
 // TEAM DATA
-const COFOUNDERS = [
+const COFOUNDERS: Founder[] = [
   { id: 'abhishek', name: 'A S ABHISHEK', role: 'Co-Founder & CEO', imagePath: '/leadership/abhishek.png', bio: 'A S Abhishek leads PLACED, an EdTech platform focused on bridging the gap between students and professional career opportunities across corporate placements, competitive government exams, and higher education pathways. He has trained 10,000+ students across 40+ colleges in South India in aptitude, communication, and career readiness. As CEO, he drives the company’s strategy, institutional partnerships, and program development.', linkedin: 'https://www.linkedin.com/in/a-s-abhishek-472327230/' },
   { id: 'vishnu', name: 'VISHNU MOHAN R', role: 'Co-Founder & COO', imagePath: '/leadership/vishnu.jpeg', bio:'Vishnu Mohan R brings 12+ years of experience in the EdTech and training industry. He has mentored students across mechanical design, competitive government examinations, and career readiness programs for corporate placements and higher education pathways. At PLACED, he leads operations, academic delivery, and program implementation.', linkedin: 'https://www.linkedin.com/in/vishnu-mohan-r-798118357/' },
   { id: 'vigneswaran', name: 'VIGNESWARAN A R', role: 'Co-Founder & CAO', imagePath: '/leadership/vigneswaran.jpeg', bio: 'Vigneswaran A R brings 7+ years of experience in EdTech and placement training, having trained 50,000+ students across 50+ colleges. He specializes in Quantitative Aptitude and Logical Reasoning, with a strong focus on building problem-solving and analytical skills. At PLACED, he leads academic design, curriculum development, and training methodology, creating structured outcome-driven learning programs.', linkedin: 'https://www.linkedin.com/in/vigneswaran-ar-9b83ba395/' },
 ]
 
-const fadeUp: any = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 }
 
-const staggerContainer: any = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
 }
@@ -250,7 +279,7 @@ const InteractiveInfinity = () => {
 // ==========================================
 // 👥 MEET THE LEADERSHIP (Appears BEFORE Faculty Pool)
 // ==========================================
-const TeamSection = ({ setSelectedFounder }: { setSelectedFounder: (founder: any) => void }) => {
+const TeamSection = ({ setSelectedFounder }: { setSelectedFounder: (founder: Founder) => void }) => {
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
 
@@ -297,7 +326,7 @@ const TeamSection = ({ setSelectedFounder }: { setSelectedFounder: (founder: any
 // ==========================================
 // 🎓 FACULTY POOL SECTION (Appears AFTER Leadership)
 // ==========================================
-const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: any[], setSelectedMentor: (mentor: any) => void }) => {
+const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: Mentor[], setSelectedMentor: (mentor: Mentor) => void }) => {
   const [facultyOffset, setFacultyOffset] = useState(0);
 
   useEffect(() => {
@@ -318,7 +347,7 @@ const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: any[]
   return (
     <section id="mentors" className="py-20 md:py-28 bg-[#052742] relative overflow-hidden text-white group border-t border-white/5">
       {/* Aptitude & Soft Skills Background Elements Updated */}
-      <motion.div animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 text-[#0DABAE]/10 text-9xl font-serif font-black pointer-events-none z-0">"</motion.div>
+      <motion.div animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 text-[#0DABAE]/10 text-9xl font-serif font-black pointer-events-none z-0">{"\""}</motion.div>
       <motion.div animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-20 right-20 text-[#0DABAE]/10 text-9xl font-black pointer-events-none z-0">?</motion.div>
       <motion.div animate={{ y: [0, -15, 0], scale: [1, 1.05, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/2 left-1/4 text-[#0DABAE]/10 text-8xl font-black pointer-events-none z-0">!</motion.div>
       <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03] pointer-events-none z-0"></div>
@@ -343,7 +372,7 @@ const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: any[]
                transition={{ duration: 0.5 }} 
                className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 items-stretch auto-rows-fr w-full"
              >
-               {filteredMentors.map((mentor: any, index: number) => (
+               {filteredMentors.map((mentor: Mentor, index: number) => (
                   mentor && (
                     <div 
                       key={`${mentor.id}-${index}`} 
@@ -352,7 +381,7 @@ const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: any[]
                     >
                       <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4 border border-white/5 bg-slate-900 shrink-0 shadow-md">
                         {mentor.image_url ? (
-                          <img src={mentor.image_url} alt={mentor.name} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 pointer-events-none" />
+                          <Image src={mentor.image_url} alt={mentor.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-105 pointer-events-none" />
                         ) : (
                           <div className="w-full h-full bg-[#0DABAE]/10 text-[#0DABAE] flex items-center justify-center text-3xl font-black">
                             {mentor.initials}
@@ -383,7 +412,11 @@ const MentorsSection = ({ mentorsData, setSelectedMentor }: { mentorsData: any[]
 // ==========================================
 // 🎓 ALUMNI SECTION 
 // ==========================================
-const AlumniSection = ({ alumniData, alumniIndex, displayedAlumni }: any) => {
+const AlumniSection = ({ alumniData, alumniIndex, displayedAlumni }: {
+  alumniData: Alumni[];
+  alumniIndex: number;
+  displayedAlumni: Alumni[];
+}) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -423,11 +456,11 @@ const AlumniSection = ({ alumniData, alumniIndex, displayedAlumni }: any) => {
          {alumniData.length > 0 ? (
            <AnimatePresence mode="wait">
              <motion.div key={alumniIndex} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
-               {displayedAlumni.map((alumni: any, index: number) => (
+               {displayedAlumni.map((alumni: Alumni, index: number) => (
                   alumni && (
                     <div key={`${alumni.id}-${index}`} className="bg-white/5 p-4 md:p-8 rounded-xl border border-white/10 backdrop-blur-sm hover:border-[#0DABAE]/50 transition-colors flex flex-col justify-between group h-full shadow-2xl relative z-10">
                       <div>
-                        <div className="text-2xl md:text-4xl text-[#0DABAE] mb-1 md:mb-4 font-serif group-hover:-translate-y-1 transition-transform">"</div>
+                        <div className="text-2xl md:text-4xl text-[#0DABAE] mb-1 md:mb-4 font-serif group-hover:-translate-y-1 transition-transform">{"\""}</div>
                         <p className="italic text-[9px] md:text-sm leading-relaxed text-slate-300 mb-4 md:mb-6">{alumni.short_quote}</p>
                       </div>
                       <div className="flex items-center gap-2 md:gap-4 border-t border-white/10 pt-3 md:pt-4 mt-auto">
@@ -458,15 +491,15 @@ const AlumniSection = ({ alumniData, alumniIndex, displayedAlumni }: any) => {
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [selectedMentor, setSelectedMentor] = useState<any>(null)
-  const [selectedFounder, setSelectedFounder] = useState<any>(null)
+  const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null)
+  const [selectedFounder, setSelectedFounder] = useState<Founder | null>(null)
   const [showPopup, setShowPopup] = useState(false)
   const [isChatOpen, setIsChatOpen] = useState(false) 
 
   const hasTriggeredPopup = useRef(false) 
   
-  const [alumniData, setAlumniData] = useState<any[]>([])
-  const [mentorsData, setMentorsData] = useState<any[]>([])
+  const [alumniData, setAlumniData] = useState<Alumni[]>([])
+  const [mentorsData, setMentorsData] = useState<Mentor[]>([])
   const [alumniIndex, setAlumniIndex] = useState(0)
 
   useEffect(() => {
@@ -639,7 +672,7 @@ export default function Home() {
                 Our 7-Phase <span className="text-[#0DABAE]">Architecture</span>
               </h2>
               <p className="text-slate-300 font-medium text-base md:text-lg max-w-lg mx-auto lg:mx-0">
-                We don't just teach. We utilize a highly structured, interactive learning framework designed to build problem-solving ability and real-world readiness from day one.
+                We don{"'"}t just teach. We utilize a highly structured, interactive learning framework designed to build problem-solving ability and real-world readiness from day one.
               </p>
             </motion.div>
 
@@ -697,7 +730,7 @@ export default function Home() {
                  <Image src="/placeddownlogo.png" alt="Placed Logo" fill sizes="(max-width: 768px) 160px, 224px" className="object-contain object-left scale-125 md:scale-150 origin-left" />
               </div>
               <p className="text-slate-400 font-medium leading-relaxed tracking-wide text-[10px] md:text-sm mb-4 max-w-[200px]">
-                The premier EdTech platform for ambitious students. One system supporting every student's next step.
+                The premier EdTech platform for ambitious students. One system supporting every student{"'"}s next step.
               </p>
               <span className="text-[#0DABAE] font-bold block text-[10px] md:text-xs uppercase tracking-widest">Infinite Possibilities.<br/>Definite Outcome.</span>
             </div>
@@ -747,7 +780,7 @@ export default function Home() {
               <div className="mt-8">
                 <p className="font-black mb-3 uppercase text-[10px] md:text-xs tracking-widest text-white">Get Our App</p>
                 <a href={PLAYSTORE_LINK} target="_blank" rel="noopener noreferrer" className="inline-block hover:scale-105 transition-transform">
-                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-10 md:h-12 w-auto object-contain" />
+                  <Image src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width={135} height={40} className="h-10 md:h-12 w-auto object-contain" />
                 </a>
               </div>
             </div>
@@ -780,7 +813,7 @@ export default function Home() {
                 <div className="text-center pt-2">
                   <div className="w-24 h-24 md:w-28 md:h-28 mx-auto rounded-xl flex items-center justify-center mb-6 relative overflow-hidden border-2 border-[#0DABAE] aspect-square shadow-md bg-[#052742]">
                     {selectedMentor.image_url ? (
-                       <img src={selectedMentor.image_url} alt={selectedMentor.name} className="w-full h-full object-cover object-top pointer-events-none" />
+                       <Image src={selectedMentor.image_url} alt={selectedMentor.name} fill sizes="(max-width: 768px) 112px, 112px" className="object-cover object-top pointer-events-none" />
                     ) : (
                        <div className="w-full h-full bg-[#0DABAE]/10 text-[#0DABAE] flex items-center justify-center text-4xl font-black">
                          {selectedMentor.initials}
